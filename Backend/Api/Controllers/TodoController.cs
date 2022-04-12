@@ -2,6 +2,7 @@
 using TodoList.Api.Dto;
 using TodoList.Api.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.Serialization;
 
 namespace TodoList.Api.Controllers;
 
@@ -39,8 +40,7 @@ public class TodoController : ControllerBase
     {
         _todoService.CreateTodo( todoDto );
         _unitOfWork.Commit();
-        var json = JsonSerializer.Serialize( todoDto );
-        return Ok( json );
+        return Ok();
     }
 
     [HttpPut( "{todoId}/complete" )]

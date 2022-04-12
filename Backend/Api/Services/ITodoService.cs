@@ -4,7 +4,7 @@ namespace TodoList.Api.Services;
 
 public interface ITodoService
 {
-    List<TodoDto> GetTodos();
+    IEnumerable<TodoDto> GetTodos();
 
     /// <summary>
     /// Get task dto object by its id

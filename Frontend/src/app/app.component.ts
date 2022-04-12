@@ -33,11 +33,8 @@ export class AppComponent
 
     public addTask( myForm: NgForm ) 
     {
-        this._taskService.Create( myForm.value.task ).subscribe( raw => 
-        {
-            let task = this._taskService.ParseDto( <TaskDto>raw );
-            this.tasks.push( task ) 
-        });
+        let taskDto = this._taskService.Create( myForm.value.task );
+        this.tasks.push( this._taskService.ParseDto( taskDto ) );
     }
 
     public onCompleteTask( task: Task )
@@ -51,7 +48,7 @@ export class AppComponent
         this._taskService.Complete( task.id );
     }
 
-    public onDeleteTask( task: Task ): void 
+    public onDeleteTask( task: Task )
     {
         this._taskService.Delete( task.id );
         if ( !task.isDone )

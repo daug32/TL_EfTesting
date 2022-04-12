@@ -20,6 +20,14 @@ public class Startup
 
     public void ConfigureServices( IServiceCollection services )
     {
+        services.AddCors( option => option.AddPolicy( "MyPolicy", 
+            builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            } ) );
+
         services.AddDbContext<TodoListDbContext>( 
             x => x.UseSqlServer( Configuration.GetConnectionString( "TodoList" ) ) );
         services.AddScoped<ITodoRepository, TodoRepository>();
@@ -31,6 +39,7 @@ public class Startup
         {
             c.SwaggerDoc( "v1", new OpenApiInfo { Title = "TodoList", Version = "v1" } );
         } );
+
     }
 
     public void Configure( IApplicationBuilder app, IWebHostEnvironment env )
@@ -43,6 +52,8 @@ public class Startup
         }
 
         app.UseRouting();
+
+        app.UseCors( "MyPolicy" );
 
         app.UseEndpoints( endpoints =>
         {

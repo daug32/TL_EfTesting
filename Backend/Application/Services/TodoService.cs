@@ -14,11 +14,9 @@ public class TodoService : ITodoService
         _todoRepo = todoRepository;
     }
 
-    public List<TodoDto> GetTodos()
+    public IEnumerable<TodoDto> GetTodos()
     {
-        return _todoRepo.GetTodos()
-            .Select( el => ModelToDto( el ) )
-            .ToList();
+        return _todoRepo.GetTodos().Select( el => ModelToDto( el ) );
     }
 
     public TodoDto GetTodo( int id )
