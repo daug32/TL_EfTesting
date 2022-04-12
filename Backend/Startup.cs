@@ -1,11 +1,11 @@
-using TodoList.Api;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using TodoList.Api;
 using TodoList.Infrastructure;
 using TodoList.Api.Services;
 using TodoList.Application.Services;
 using TodoList.Application.Repositories;
 using TodoList.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace TodoList;
 

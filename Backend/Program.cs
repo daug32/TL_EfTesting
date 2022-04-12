@@ -1,6 +1,4 @@
-﻿using TodoList;
-
-namespace TodoList;
+﻿namespace TodoList;
 
 public class Program
 {

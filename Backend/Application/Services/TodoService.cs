@@ -27,6 +27,7 @@ public class TodoService : ITodoService
     public void CompleteTodo( int todoId )
     {
         var todo = _todoRepo.Get( todoId );
+        if ( todo.Id < 1 ) return;
         todo.IsDone = true;
         _todoRepo.Update( todo );
     }

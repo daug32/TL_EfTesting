@@ -1,13 +1,11 @@
-﻿using System.Text.Json;
-using TodoList.Api.Dto;
+﻿using TodoList.Api.Dto;
 using TodoList.Api.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.Serialization;
 
 namespace TodoList.Api.Controllers;
 
-[Route( "rest/[controller]" )]
 [ApiController]
+[Route( "rest/[controller]" )]
 public class TodoController : ControllerBase
 {
     private IUnitOfWork _unitOfWork;
@@ -22,17 +20,19 @@ public class TodoController : ControllerBase
     [HttpGet( "get-all" )]
     public IActionResult GetAll()
     {
-        var todos = _todoService.GetTodos().ToArray();
-        var json = JsonSerializer.Serialize( todos );
-        return Ok( json );
+        var todoDtos = _todoService.GetTodos();
+        return Ok( todoDtos );
     }
 
     [HttpGet( "{todoId}" )]
     public IActionResult Get( int todoId )
     {
-        var todo = _todoService.GetTodo( todoId );
-        var json = JsonSerializer.Serialize( todo );
-        return Ok( json );
+        var todoDto = _todoService.GetTodo( todoId );
+        if ( todoDto.Id < 1 )
+        {
+            return BadRequest( "Todo with this id doesn't exist" );
+        }
+        return Ok( todoDto );
     }
 
     [HttpPost( "create" )]
@@ -56,6 +56,6 @@ public class TodoController : ControllerBase
     {
         _todoService.DeleteTodo( todoId );
         _unitOfWork.Commit();
-        return Ok( "true" );
+        return Ok( );
     }
 }

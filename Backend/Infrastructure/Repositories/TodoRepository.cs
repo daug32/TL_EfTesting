@@ -12,14 +12,16 @@ public class TodoRepository : ITodoRepository
         _dbContext = dbContext;
     }
 
-    public List<Todo> GetTodos()
+    public IEnumerable<Todo> GetTodos()
     {
-        return _dbContext.Set<Todo>().ToList();
+        return _dbContext.Set<Todo>();
     }
 
     public Todo Get( int id )   
     {
-        return _dbContext.Set<Todo>().FirstOrDefault( el => el.Id == id );
+        var todo = _dbContext.Set<Todo>().FirstOrDefault( el => el.Id == id );
+        if ( todo == null ) return new Todo();
+        return todo;
     }
 
     public void Create( Todo todo )
@@ -35,6 +37,7 @@ public class TodoRepository : ITodoRepository
     public void Delete( int todoId )
     {
         var todo = Get( todoId );
+        if ( todo.Id < 1 ) return;
         _dbContext.Remove( todo );
     }
 }

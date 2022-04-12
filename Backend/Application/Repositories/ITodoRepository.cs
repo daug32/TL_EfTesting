@@ -7,7 +7,7 @@ public interface ITodoRepository
     /// <summary>
     /// Returns all task from database
     /// </summary>
-    List<Todo> GetTodos();
+    IEnumerable<Todo> GetTodos();
 
     /// <summary>
     /// Returns task by its id or default
