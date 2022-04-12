@@ -22,9 +22,9 @@ export class TaskService
     {
         let taskDto: TaskDto = 
         {
-            Id: 0,
-            Title: taskTitle,
-            IsDone: false
+            id: 0,
+            title: taskTitle,
+            isDone: false
         };
         this.http.post( `${this._todoConttrollerUrl}/create`, taskDto ).subscribe();
         return taskDto;
@@ -44,9 +44,9 @@ export class TaskService
     {
         let task: Task = 
         {
-            id: dto.Id,
-            title: dto.Title,
-            isDone: dto.IsDone
+            id: dto.id,
+            title: dto.title,
+            isDone: dto.isDone
         };
         return task;
     }
@@ -55,9 +55,9 @@ export class TaskService
     {
         let dto: TaskDto = 
         {
-            Id: task.id,
-            Title: task.title,
-            IsDone: task.isDone
+            id: task.id,
+            title: task.title,
+            isDone: task.isDone
         };
         return dto;
     }
